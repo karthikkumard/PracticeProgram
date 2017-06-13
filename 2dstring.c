@@ -1,0 +1,144 @@
+/*
+i/p:
+5
++++++
++*+++
++*+++
++****
++++++
+cat
+tall
+
+o/p:
++++++
++c+++
++a+++
++tall
++++++
+
+*/
+#include<stdio.h>
+#include <stdlib.h>
+#include<string.h>
+int main()
+{
+char w[100][100],s1[100],s2[100];
+int n,i,j,f=0,c,count=0,k,len,len1,l,flag=0,flag1=0,z=0,f1=0,q,d,m,b;
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+scanf("%s",w[i]);
+}
+scanf("%s",&s1);
+scanf("%s",&s2);
+len=strlen(s1);
+len1=strlen(s2);
+for(i=0;i<n;i++)
+{
+    for(j=0;j<n;j++)
+    {  
+        if(w[i][j]=='*')
+        {
+        f1=1;
+        d=j;
+            for(k=d;w[i][k]=='*';k++)
+            {
+                count++;
+                j++;
+            }
+            if(count==len)
+            {
+                b=count;
+                flag=1;
+                q=i;
+                l=d;
+                m=z;
+            }
+             if(count==len1)
+            {
+                b=count;
+                flag1=1;
+                q=i;
+                l=d;
+                m=z;
+            }
+            count=0;
+            }
+    }
+    if(f1==1)
+    {
+        z++;
+    }
+    f1=0;
+}
+if(len==len1)
+{
+    for(i=0;i<len;i++)
+    {
+    if(s1[m]==s2[i])
+    {
+    flag=0;
+    flag1=1;
+    break;
+    }
+    if(s2[m]==s1[i])
+    {
+        flag=1;
+        flag1=0;
+        break;
+    }
+    }
+}
+if(flag==1&&flag1==1)
+{
+    if(b==len)
+    {
+        flag1=0;
+    }
+    if(b==len1)
+    {
+        flag==0;
+    }
+}
+for(i=0;i<n;i++)
+{
+    for(j=0;j<n;j++)
+    {
+        if(w[i][j]=='*')
+        {
+            if(flag==0)
+            {
+                w[i][j]=s1[f++];
+                if(q==i&&l==j)
+                {
+                    for(k=0;k<strlen(s2);k++)
+                    {
+                        w[i][j++]=s2[k];
+                    }
+                }
+            }
+            if(flag1==0)
+            {
+                w[i][j]=s2[f++];
+                if(q==i&&l==j)
+                {
+                    for(k=0;k<strlen(s1);k++)
+                    {
+                        w[i][j++]=s1[k];
+                    }
+                }
+            }
+        }
+    }
+}
+//if(n==6&&s1[0]!='L')
+//printf("flag=%d flag1=%d q=%d d=%d l=%d count=%d ",flag,flag1,q,d,l,count);
+for(i=0;i<n;i++)
+{
+    for(j=0;j<n;j++)
+    {
+        printf("%c",w[i][j]);
+    }
+    printf("\n");
+}
+}
