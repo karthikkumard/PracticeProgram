@@ -1,0 +1,115 @@
+Program 1 :
+
+forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2
+Your horizontal position and depth both start at 0. The steps above would then modify them as follows:
+
+forward 5 adds 5 to your horizontal position, a total of 5.
+down 5 adds 5 to your depth, resulting in a value of 5.
+forward 8 adds 8 to your horizontal position, a total of 13.
+up 3 decreases your depth by 3, resulting in a value of 2.
+down 8 adds 8 to your depth, resulting in a value of 10.
+forward 2 adds 2 to your horizontal position, a total of 15.
+After following these instructions, you would have a horizontal position of 15 and a depth of 10. (Multiplying these together produces 150.)
+
+
+Solution:
+import java.io.*;
+
+class AdventDay2
+{
+	public static void main(String arg[])
+	{
+		try
+		{
+		File file = new File("/home/local/ZOHOCORP/karthi-6701/Documents/integrity.csv");
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String string;
+		Long horizortialpos=0l;
+		Long depthpos=0l;
+		while((string = br.readLine()) != null)
+		{
+			String[] input = string.split(" ");
+			Long pos = Long.valueOf(input[1]);
+			if(input[0].equals("forward"))
+			{
+				horizortialpos += pos;
+			}
+			else if(input[0].equals("up"))
+			{
+				depthpos -= pos;
+			}
+			else
+			{
+				depthpos += pos;
+			}
+		}
+		System.out.println(horizortialpos*depthpos);
+	}
+	catch(Exception e)
+	{
+		System.out.println("exception"+e);
+	}
+	}
+}
+
+
+Problem 2:
+forward 5 adds 5 to your horizontal position, a total of 5. Because your aim is 0, your depth does not change.
+down 5 adds 5 to your aim, resulting in a value of 5.
+forward 8 adds 8 to your horizontal position, a total of 13. Because your aim is 5, your depth increases by 8*5=40.
+up 3 decreases your aim by 3, resulting in a value of 2.
+down 8 adds 8 to your aim, resulting in a value of 10.
+forward 2 adds 2 to your horizontal position, a total of 15. Because your aim is 10, your depth increases by 2*10=20 to a total of 60.
+After following these new instructions, you would have a horizontal position of 15 and a depth of 60. (Multiplying these produces 900.)
+
+
+Solution:
+import java.io.*;
+
+class AdventDay2
+{
+	public static void main(String arg[])
+	{
+		try
+		{
+		File file = new File("/home/local/ZOHOCORP/karthi-6701/Documents/integrity.csv");
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String string;
+		Long horizortialpos=0l;
+		Long depthpos=0l;
+		Long aim =0l;
+		while((string = br.readLine()) != null)
+		{
+			String[] input = string.split(" ");
+			Long pos = Long.valueOf(input[1]);
+			if(input[0].equals("forward"))
+			{
+				horizortialpos += pos;
+				if(depthpos!=0)
+				{
+					aim = aim + (Math.abs(pos*depthpos));
+				}
+			}
+			else if(input[0].equals("up"))
+			{
+				depthpos += pos;
+			}
+			else
+			{
+				depthpos -= pos;
+			}
+		}
+		System.out.println(horizortialpos*aim);
+	}
+	catch(Exception e)
+	{
+		System.out.println("exception"+e);
+	}
+	}
+}
+
